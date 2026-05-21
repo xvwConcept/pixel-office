@@ -10,7 +10,6 @@ export function LoginPage() {
   const [tab, setTab] = useState<Tab>('login');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [pin, setPin] = useState('');
   const [displayName, setDisplayName] = useState('');
   const [avatarId, setAvatarId] = useState<1 | 2 | 3 | 4>(1);
   const [error, setError] = useState('');
@@ -30,7 +29,7 @@ export function LoginPage() {
           navigate('/office');
         }
       } else {
-        const { data, error: authError } = await signUp(email, password, pin);
+        const { data, error: authError } = await signUp(email, password);
         if (authError) {
           setError(authError.message);
         } else if (data.session) {
@@ -54,15 +53,12 @@ export function LoginPage() {
           Pixel Office
         </h1>
 
-        {/* Tab toggle */}
         <div className="flex bg-gray-800 rounded-full p-1 mb-6">
           <button
             type="button"
             onClick={() => { setTab('login'); setError(''); }}
             className={`flex-1 py-2 px-4 rounded-full text-sm font-medium transition-colors ${
-              tab === 'login'
-                ? 'bg-white text-gray-900'
-                : 'text-gray-400 hover:text-white'
+              tab === 'login' ? 'bg-white text-gray-900' : 'text-gray-400 hover:text-white'
             }`}
           >
             Anmelden
@@ -71,9 +67,7 @@ export function LoginPage() {
             type="button"
             onClick={() => { setTab('register'); setError(''); }}
             className={`flex-1 py-2 px-4 rounded-full text-sm font-medium transition-colors ${
-              tab === 'register'
-                ? 'bg-white text-gray-900'
-                : 'text-gray-400 hover:text-white'
+              tab === 'register' ? 'bg-white text-gray-900' : 'text-gray-400 hover:text-white'
             }`}
           >
             Registrieren
@@ -89,55 +83,36 @@ export function LoginPage() {
           )}
 
           {tab === 'register' && (
-            <div>
-              <input
-                type="text"
-                placeholder="Anzeigename"
-                value={displayName}
-                onChange={(e) => setDisplayName(e.target.value)}
-                required
-                maxLength={32}
-                className="w-full bg-gray-800 text-white placeholder-gray-500 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:border-gray-500"
-              />
-            </div>
-          )}
-
-          <div>
             <input
-              type="email"
-              placeholder="E-Mail"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              type="text"
+              placeholder="Anzeigename"
+              value={displayName}
+              onChange={(e) => setDisplayName(e.target.value)}
               required
+              maxLength={32}
               className="w-full bg-gray-800 text-white placeholder-gray-500 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:border-gray-500"
             />
-          </div>
-          <div>
-            <input
-              type="password"
-              placeholder="Passwort"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              className="w-full bg-gray-800 text-white placeholder-gray-500 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:border-gray-500"
-            />
-          </div>
-          {tab === 'register' && (
-            <div>
-              <input
-                type="password"
-                placeholder="Team PIN"
-                value={pin}
-                onChange={(e) => setPin(e.target.value)}
-                required
-                className="w-full bg-gray-800 text-white placeholder-gray-500 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:border-gray-500"
-              />
-            </div>
           )}
 
-          {error && (
-            <p className="text-red-400 text-sm">{error}</p>
-          )}
+          <input
+            type="email"
+            placeholder="E-Mail"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            className="w-full bg-gray-800 text-white placeholder-gray-500 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:border-gray-500"
+          />
+
+          <input
+            type="password"
+            placeholder="Passwort"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            className="w-full bg-gray-800 text-white placeholder-gray-500 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:border-gray-500"
+          />
+
+          {error && <p className="text-red-400 text-sm">{error}</p>}
 
           <button
             type="submit"

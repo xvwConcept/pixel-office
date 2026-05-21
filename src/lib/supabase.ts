@@ -17,8 +17,6 @@ export interface AuthResponse {
 // Keep MockSession as alias so existing imports don't break
 export type MockSession = Session;
 
-const TEAM_PIN = import.meta.env.VITE_TEAM_PIN as string | undefined;
-
 export async function signIn(email: string, password: string): Promise<AuthResponse> {
   try {
     const cred = await signInWithEmailAndPassword(auth, email, password);
@@ -32,10 +30,7 @@ export async function signIn(email: string, password: string): Promise<AuthRespo
   }
 }
 
-export async function signUp(email: string, password: string, pin: string): Promise<AuthResponse> {
-  if (pin !== TEAM_PIN) {
-    return { data: { session: null }, error: { message: 'Ungültiger Team-PIN' } };
-  }
+export async function signUp(email: string, password: string): Promise<AuthResponse> {
   try {
     const cred = await createUserWithEmailAndPassword(auth, email, password);
     return {
