@@ -194,27 +194,6 @@ function drawDeskSetup(g: PIXI.Graphics, x: number, y: number): void {
   drawDesk(g,  x,           y);
 }
 
-// ─── Filing cabinet ───────────────────────────────────────────────────────────
-
-function drawCabinet(g: PIXI.Graphics, x: number, y: number, drawers = 3): void {
-  const W = 12 * P, DH = 7 * P;
-  const H = drawers * DH + 2 * P;
-  // Body
-  r(g, x,       y,     W,     H,     C.CAB);
-  r(g, x,       y,     P,     H,     C.CAB_EDGE);
-  r(g, x + W-P, y,     P,     H,     C.CAB_EDGE);
-  r(g, x,       y,     W,     P,     C.CAB_EDGE);
-  // Drawers
-  for (let i = 0; i < drawers; i++) {
-    const dy = y + P + i * DH;
-    r(g, x + P,   dy,          W - 2*P, DH - P,  C.CAB_EDGE);
-    r(g, x + P,   dy,          W - 2*P, DH - 2*P, C.CAB);
-    // Handle
-    r(g, x + 4*P, dy + 2*P,    4 * P,   2 * P,   C.CAB_HANDLE);
-    r(g, x + 5*P, dy + 2*P,    2 * P,   P,       C.CAB);
-  }
-}
-
 // ─── Plant ────────────────────────────────────────────────────────────────────
 
 function drawPlant(g: PIXI.Graphics, x: number, y: number): void {
