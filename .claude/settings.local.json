@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cat ~/.zshrc 2>/dev/null | head -50; cat ~/.zprofile 2>/dev/null | head -30; cat ~/.bash_profile 2>/dev/null | head -30)",
+      "Bash(brew list *)",
+      "Bash(brew info *)",
+      "Bash(brew install *)",
+      "Bash(npm --version)",
+      "Bash(npm create *)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(npm install *)"
+    ]
+  }
+}
